@@ -6,6 +6,8 @@ import { Manrope } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/components/auth-provider"
+import Footer from "@/components/ui/Footer"
+
 
 const manrope = Manrope({
   subsets: ["latin"],
@@ -28,7 +30,16 @@ export default function RootLayout({
     <html lang="fr" suppressHydrationWarning>
       <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} ${manrope.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            
+            
+            {
+            children
+          
+            }
+                 <Footer/>
+          
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
