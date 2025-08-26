@@ -6,7 +6,13 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { ArrowLeft, RotateCcw, Trophy, Clock } from "lucide-react"
 import { QuizCard } from "./quiz-card"
-import { type Question, type QuizResult, getRandomQuestions, getCategories, saveQuizResult } from "@/lib/quiz-utils"
+import {
+  type Question,
+  type QuizResult,
+  getRandomQuestions,
+  getCategories,
+  saveQuizResult,
+} from "@/lib/quiz-utils"
 
 interface QuizInterfaceProps {
   categoryId: string
@@ -22,17 +28,25 @@ export function QuizInterface({ categoryId, onBack, onComplete }: QuizInterfaceP
   const [isCompleted, setIsCompleted] = useState(false)
   const [showResult, setShowResult] = useState(false)
   const [startTime, setStartTime] = useState<number>(Date.now())
+  const [finalResult, setFinalResult] = useState<QuizResult | null>(null)
 
   const categories = getCategories()
-  const categoryName = categories[categoryId]?.name || ""
+  const categoryName = categories[categoryId as keyof typeof categories]?.name || ""
 
+  // (Re)load quiz when category changes
   useEffect(() => {
     const quizQuestions = getRandomQuestions(categoryId, 5)
     setQuestions(quizQuestions)
     setAnswers(new Array(quizQuestions.length).fill(-1))
+    setCurrentQuestionIndex(0)
+    setTimeRemaining(30)
+    setIsCompleted(false)
+    setShowResult(false)
     setStartTime(Date.now())
+    setFinalResult(null)
   }, [categoryId])
 
+  // Countdown timer
   useEffect(() => {
     if (isCompleted || showResult) return
 
@@ -47,20 +61,53 @@ export function QuizInterface({ categoryId, onBack, onComplete }: QuizInterfaceP
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [currentQuestionIndex, isCompleted, showResult])
+  }, [currentQuestionIndex, isCompleted, showResult]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleTimeUp = () => {
-    if (answers[currentQuestionIndex] === -1) {
-      const newAnswers = [...answers]
-      newAnswers[currentQuestionIndex] = Math.floor(Math.random() * 4)
-      setAnswers(newAnswers)
+  const completeQuiz = (finalAnswers: number[]) => {
+    setIsCompleted(true)
+
+    const correctAnswers = finalAnswers.filter(
+      (answer, index) => answer === questions[index]?.correct
+    ).length
+
+    const percentage = Math.round((correctAnswers / questions.length) * 100)
+    const timeSpent = Math.round((Date.now() - startTime) / 1000)
+
+    const result: QuizResult = {
+      categoryId,
+      categoryName,
+      score: correctAnswers,
+      totalQuestions: questions.length,
+      percentage,
+      date: new Date().toISOString(),
+      timeSpent,
+      answers: finalAnswers.map((answer, index) => ({
+        questionId: questions[index].id,
+        selectedAnswer: answer,
+        correct: answer === questions[index].correct,
+      })),
     }
 
+    saveQuizResult(result)
+    setFinalResult(result)
+    onComplete(result)
+  }
+
+  const handleTimeUp = () => {
+    const newAnswers = [...answers]
+
+    if (newAnswers[currentQuestionIndex] === -1) {
+      // Keep behavior: on timeout, set the correct answer. If you want "no answer", keep -1.
+      newAnswers[currentQuestionIndex] = questions[currentQuestionIndex].correct
+    }
+
+    setAnswers(newAnswers)
+
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1)
+      setCurrentQuestionIndex((i) => i + 1)
       setTimeRemaining(30)
     } else {
-      completeQuiz()
+      completeQuiz(newAnswers) // use finalized answers
     }
   }
 
@@ -74,39 +121,12 @@ export function QuizInterface({ categoryId, onBack, onComplete }: QuizInterfaceP
     setTimeout(() => {
       setShowResult(false)
       if (currentQuestionIndex < questions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1)
+        setCurrentQuestionIndex((i) => i + 1)
         setTimeRemaining(30)
       } else {
-        completeQuiz()
+        completeQuiz(newAnswers) // use finalized answers
       }
     }, 2000)
-  }
-
-  const completeQuiz = () => {
-    setIsCompleted(true)
-
-    const correctAnswers = answers.filter((answer, index) => answer === questions[index]?.correct).length
-
-    const percentage = Math.round((correctAnswers / questions.length) * 100)
-    const timeSpent = Math.round((Date.now() - startTime) / 1000)
-
-    const result: QuizResult = {
-      categoryId,
-      categoryName,
-      score: correctAnswers,
-      totalQuestions: questions.length,
-      percentage,
-      date: new Date().toISOString(),
-      timeSpent,
-      answers: answers.map((answer, index) => ({
-        questionId: questions[index].id,
-        selectedAnswer: answer,
-        correct: answer === questions[index].correct,
-      })),
-    }
-
-    saveQuizResult(result)
-    onComplete(result)
   }
 
   const restartQuiz = () => {
@@ -118,6 +138,7 @@ export function QuizInterface({ categoryId, onBack, onComplete }: QuizInterfaceP
     setIsCompleted(false)
     setShowResult(false)
     setStartTime(Date.now())
+    setFinalResult(null)
   }
 
   if (questions.length === 0) {
@@ -132,9 +153,8 @@ export function QuizInterface({ categoryId, onBack, onComplete }: QuizInterfaceP
     )
   }
 
-  if (isCompleted) {
-    const correctAnswers = answers.filter((answer, index) => answer === questions[index]?.correct).length
-    const percentage = Math.round((correctAnswers / questions.length) * 100)
+  if (isCompleted && finalResult) {
+    const { percentage, score, totalQuestions, timeSpent } = finalResult
 
     return (
       <div className="min-h-screen bg-background">
@@ -151,7 +171,7 @@ export function QuizInterface({ categoryId, onBack, onComplete }: QuizInterfaceP
                 <div className="mb-8">
                   <div className="text-6xl font-bold text-primary mb-2">{percentage}%</div>
                   <p className="text-xl text-muted-foreground">
-                    {correctAnswers} sur {questions.length} bonnes réponses
+                    {score} sur {totalQuestions} bonnes réponses
                   </p>
                   <Progress value={percentage} className="w-full mt-4" />
                 </div>
@@ -160,7 +180,7 @@ export function QuizInterface({ categoryId, onBack, onComplete }: QuizInterfaceP
                   <div className="text-center">
                     <Clock className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
                     <p className="text-sm text-muted-foreground">Temps total</p>
-                    <p className="font-semibold">{Math.round((Date.now() - startTime) / 1000)}s</p>
+                    <p className="font-semibold">{timeSpent}s</p>
                   </div>
                   <div className="text-center">
                     <Trophy className="w-8 h-8 mx-auto mb-2 text-muted-foreground" />
@@ -169,10 +189,10 @@ export function QuizInterface({ categoryId, onBack, onComplete }: QuizInterfaceP
                       {percentage >= 80
                         ? "Excellent"
                         : percentage >= 60
-                          ? "Bien"
-                          : percentage >= 40
-                            ? "Moyen"
-                            : "À améliorer"}
+                        ? "Bien"
+                        : percentage >= 40
+                        ? "Moyen"
+                        : "À améliorer"}
                     </p>
                   </div>
                 </div>

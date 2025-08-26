@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Progress } from "@/components/ui/progress"
@@ -26,49 +25,28 @@ export function QuizCard({
   showResult = false,
   selectedAnswer,
 }: QuizCardProps) {
-  const [localSelectedAnswer, setLocalSelectedAnswer] = useState<number | null>(null)
-
   const handleAnswerClick = (answerIndex: number) => {
     if (showResult) return
-
-    setLocalSelectedAnswer(answerIndex)
     onAnswer(answerIndex)
   }
 
   const getButtonVariant = (index: number) => {
     if (!showResult) {
-      return "outline"
+      return selectedAnswer === index ? "default" : "outline"
     }
-
-    if (index === question.correct) {
-      return "default"
-    }
-
-    if (selectedAnswer === index && index !== question.correct) {
-      return "destructive"
-    }
-
+    if (index === question.correct) return "default"
+    if (selectedAnswer === index && index !== question.correct) return "destructive"
     return "outline"
-  }
-
-  const getButtonClassName = (index: number) => {
-    if (!showResult && localSelectedAnswer === index) {
-      return "ring-2 ring-primary ring-offset-2"
-    }
-    return ""
   }
 
   const getButtonIcon = (index: number) => {
     if (!showResult) return null
-
     if (index === question.correct) {
-      return <CheckCircle className="w-4 h-4 ml-2" />
+      return <CheckCircle className="w-4 h-4 ml-2 text-green-600" aria-hidden />
     }
-
     if (selectedAnswer === index && index !== question.correct) {
-      return <XCircle className="w-4 h-4 ml-2" />
+      return <XCircle className="w-4 h-4 ml-2 text-red-600" aria-hidden />
     }
-
     return null
   }
 
@@ -80,7 +58,7 @@ export function QuizCard({
             Question {questionNumber} sur {totalQuestions}
           </CardTitle>
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Clock className="w-4 h-4" />
+            <Clock className="w-4 h-4" aria-hidden />
             <span>{timeRemaining}s</span>
           </div>
         </div>
@@ -95,7 +73,9 @@ export function QuizCard({
             <Button
               key={index}
               variant={getButtonVariant(index)}
-              className={`justify-start text-left h-auto p-4 whitespace-normal ${getButtonClassName(index)}`}
+              className={`justify-start text-left h-auto p-4 whitespace-normal ${
+                !showResult && selectedAnswer === index ? "ring-2 ring-primary ring-offset-2" : ""
+              }`}
               onClick={() => handleAnswerClick(index)}
               disabled={showResult}
             >
