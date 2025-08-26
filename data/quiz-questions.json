@@ -1,0 +1,274 @@
+{
+  "categories": {
+    "valeurs-symboles": {
+      "name": "Valeurs et symboles",
+      "questions": [
+        {
+          "id": 1,
+          "question": "Quelle est la devise de la République française ?",
+          "options": [
+            "Liberté, Égalité, Fraternité",
+            "Honneur et Patrie",
+            "Travail, Famille, Patrie",
+            "Unité, Indivisibilité, République"
+          ],
+          "correct": 0,
+          "explanation": "La devise de la République française est 'Liberté, Égalité, Fraternité', héritée de la Révolution française de 1789."
+        },
+        {
+          "id": 2,
+          "question": "Quelles sont les couleurs du drapeau français ?",
+          "options": ["Rouge, blanc, vert", "Bleu, blanc, rouge", "Bleu, blanc, jaune", "Rouge, blanc, noir"],
+          "correct": 1,
+          "explanation": "Le drapeau tricolore français est composé de trois bandes verticales : bleu, blanc et rouge."
+        },
+        {
+          "id": 3,
+          "question": "Quel est l'hymne national français ?",
+          "options": ["Le Chant du Départ", "La Marseillaise", "La Carmagnole", "Ça Ira"],
+          "correct": 1,
+          "explanation": "La Marseillaise, composée par Rouget de Lisle en 1792, est l'hymne national français depuis 1879."
+        },
+        {
+          "id": 4,
+          "question": "Que représente Marianne ?",
+          "options": ["La monarchie française", "La République française", "L'Église catholique", "L'armée française"],
+          "correct": 1,
+          "explanation": "Marianne est la figure symbolique de la République française, représentant la liberté et la raison."
+        },
+        {
+          "id": 5,
+          "question": "Quelle est la fête nationale française ?",
+          "options": ["Le 1er mai", "Le 11 novembre", "Le 14 juillet", "Le 8 mai"],
+          "correct": 2,
+          "explanation": "Le 14 juillet commémore la prise de la Bastille en 1789, symbole du début de la Révolution française."
+        }
+      ]
+    },
+    "institutions": {
+      "name": "Institutions",
+      "questions": [
+        {
+          "id": 6,
+          "question": "Qui est le chef de l'État français ?",
+          "options": [
+            "Le Premier ministre",
+            "Le Président de la République",
+            "Le Président du Sénat",
+            "Le Président de l'Assemblée nationale"
+          ],
+          "correct": 1,
+          "explanation": "Le Président de la République est le chef de l'État français, élu au suffrage universel direct pour 5 ans."
+        },
+        {
+          "id": 7,
+          "question": "Combien y a-t-il de régions en France métropolitaine ?",
+          "options": ["12", "13", "14", "15"],
+          "correct": 1,
+          "explanation": "Depuis la réforme territoriale de 2016, la France métropolitaine compte 13 régions."
+        },
+        {
+          "id": 8,
+          "question": "Quel est le rôle du Conseil constitutionnel ?",
+          "options": [
+            "Voter les lois",
+            "Contrôler la constitutionnalité des lois",
+            "Élire le Président",
+            "Nommer les ministres"
+          ],
+          "correct": 1,
+          "explanation": "Le Conseil constitutionnel veille à la conformité des lois à la Constitution française."
+        },
+        {
+          "id": 9,
+          "question": "Quelle est la durée du mandat présidentiel ?",
+          "options": ["4 ans", "5 ans", "6 ans", "7 ans"],
+          "correct": 1,
+          "explanation": "Depuis 2002, le mandat présidentiel dure 5 ans (quinquennat), renouvelable une fois consécutivement."
+        },
+        {
+          "id": 10,
+          "question": "Où siège l'Assemblée nationale ?",
+          "options": ["À l'Élysée", "Au Palais Bourbon", "Au Palais du Luxembourg", "À Matignon"],
+          "correct": 1,
+          "explanation": "L'Assemblée nationale siège au Palais Bourbon à Paris depuis 1798."
+        }
+      ]
+    },
+    "histoire": {
+      "name": "Histoire",
+      "questions": [
+        {
+          "id": 11,
+          "question": "En quelle année a eu lieu la Révolution française ?",
+          "options": ["1789", "1792", "1799", "1804"],
+          "correct": 0,
+          "explanation": "La Révolution française a commencé en 1789 avec la prise de la Bastille le 14 juillet."
+        },
+        {
+          "id": 12,
+          "question": "Qui était Napoléon Bonaparte ?",
+          "options": [
+            "Un roi de France",
+            "Un empereur des Français",
+            "Un président de la République",
+            "Un Premier ministre"
+          ],
+          "correct": 1,
+          "explanation": "Napoléon Bonaparte fut empereur des Français de 1804 à 1814, puis brièvement en 1815."
+        },
+        {
+          "id": 13,
+          "question": "Quand la Première Guerre mondiale s'est-elle terminée ?",
+          "options": ["1917", "1918", "1919", "1920"],
+          "correct": 1,
+          "explanation": "La Première Guerre mondiale s'est terminée le 11 novembre 1918 avec l'armistice."
+        },
+        {
+          "id": 14,
+          "question": "Qui était Charles de Gaulle ?",
+          "options": [
+            "Un maréchal de France",
+            "Le fondateur de la Ve République",
+            "Un résistant et homme d'État",
+            "Toutes les réponses sont correctes"
+          ],
+          "correct": 3,
+          "explanation": "Charles de Gaulle était un militaire, résistant, homme d'État et fondateur de la Ve République française."
+        },
+        {
+          "id": 15,
+          "question": "En quelle année la France a-t-elle aboli l'esclavage définitivement ?",
+          "options": ["1794", "1848", "1863", "1865"],
+          "correct": 1,
+          "explanation": "L'esclavage a été définitivement aboli en France en 1848 sous la Seconde République."
+        }
+      ]
+    },
+    "culture-societe": {
+      "name": "Culture et société",
+      "questions": [
+        {
+          "id": 16,
+          "question": "Quelle est la langue officielle de la France ?",
+          "options": [
+            "Le français et l'anglais",
+            "Le français uniquement",
+            "Le français et les langues régionales",
+            "Aucune langue officielle"
+          ],
+          "correct": 1,
+          "explanation": "Le français est la seule langue officielle de la République française selon la Constitution."
+        },
+        {
+          "id": 17,
+          "question": "Quel principe régit la laïcité en France ?",
+          "options": [
+            "La séparation de l'Église et de l'État",
+            "L'interdiction des religions",
+            "La religion catholique obligatoire",
+            "La liberté religieuse limitée"
+          ],
+          "correct": 0,
+          "explanation": "La laïcité française repose sur la séparation de l'Église et de l'État, garantissant la liberté de conscience."
+        },
+        {
+          "id": 18,
+          "question": "Qu'est-ce que la Sécurité sociale ?",
+          "options": [
+            "Un service de police",
+            "Un système de protection sociale",
+            "Une assurance privée",
+            "Un service militaire"
+          ],
+          "correct": 1,
+          "explanation": "La Sécurité sociale est le système français de protection sociale couvrant maladie, retraite, famille, etc."
+        },
+        {
+          "id": 19,
+          "question": "Quel est le principe de l'école publique française ?",
+          "options": [
+            "Gratuite, laïque et obligatoire",
+            "Payante et religieuse",
+            "Gratuite mais non obligatoire",
+            "Laïque mais payante"
+          ],
+          "correct": 0,
+          "explanation": "L'école publique française est gratuite, laïque et obligatoire de 3 à 16 ans."
+        },
+        {
+          "id": 20,
+          "question": "Qu'est-ce que le service civique ?",
+          "options": [
+            "Le service militaire obligatoire",
+            "Un engagement volontaire au service de l'intérêt général",
+            "Un travail obligatoire",
+            "Une formation professionnelle"
+          ],
+          "correct": 1,
+          "explanation": "Le service civique est un engagement volontaire de 6 à 12 mois au service de l'intérêt général."
+        }
+      ]
+    },
+    "integration-personnelle": {
+      "name": "Intégration personnelle",
+      "questions": [
+        {
+          "id": 21,
+          "question": "Quelles sont les conditions pour obtenir la nationalité française par mariage ?",
+          "options": [
+            "Être marié depuis 2 ans minimum",
+            "Être marié depuis 4 ans minimum",
+            "Être marié depuis 5 ans minimum",
+            "Aucune durée minimum"
+          ],
+          "correct": 1,
+          "explanation": "Pour obtenir la nationalité française par mariage, il faut être marié depuis au moins 4 ans avec un(e) Français(e)."
+        },
+        {
+          "id": 22,
+          "question": "Quel niveau de français est requis pour la naturalisation ?",
+          "options": ["Niveau A2", "Niveau B1", "Niveau B2", "Niveau C1"],
+          "correct": 2,
+          "explanation": "Un niveau B2 en français est requis pour la naturalisation, attesté par un diplôme ou un test."
+        },
+        {
+          "id": 23,
+          "question": "Qu'est-ce que l'assimilation dans le processus de naturalisation ?",
+          "options": [
+            "Abandonner sa culture d'origine",
+            "Adopter le mode de vie français",
+            "Parler uniquement français",
+            "Changer de religion"
+          ],
+          "correct": 1,
+          "explanation": "L'assimilation consiste à adopter le mode de vie français tout en respectant les valeurs de la République."
+        },
+        {
+          "id": 24,
+          "question": "Quels sont les droits acquis avec la nationalité française ?",
+          "options": [
+            "Le droit de vote uniquement",
+            "Le droit de vote et d'éligibilité",
+            "Aucun droit particulier",
+            "Le droit au travail uniquement"
+          ],
+          "correct": 1,
+          "explanation": "La nationalité française confère notamment les droits de vote et d'éligibilité aux élections."
+        },
+        {
+          "id": 25,
+          "question": "Qu'est-ce qu'un casier judiciaire vierge ?",
+          "options": [
+            "Ne pas avoir de condamnations pénales",
+            "Ne pas avoir de contraventions",
+            "Ne pas avoir de dettes",
+            "Ne pas avoir de problèmes administratifs"
+          ],
+          "correct": 0,
+          "explanation": "Un casier judiciaire vierge signifie l'absence de condamnations pénales inscrites au bulletin n°2."
+        }
+      ]
+    }
+  }
+}
