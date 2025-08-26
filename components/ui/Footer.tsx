@@ -32,7 +32,7 @@ export default function Footer() {
             <img
               src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png"
               alt="Buy Me A Coffee"
-              className="h-10 md:h-12"
+              className="h-10 md:h-12 w-auto"
             />
           </a>
 
@@ -47,7 +47,7 @@ export default function Footer() {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               fill="currentColor"
-              className="w-8 h-8 md:w-9 md:h-9 text-blue-700 dark:text-blue-400"
+              className="h-10 md:h-12 w-auto text-blue-700 dark:text-blue-400"
             >
               <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11.75 20h-3v-11h3v11zm-1.5-12.25c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.25 12.25h-3v-5.5c0-1.379-.028-3.156-1.922-3.156-1.922 0-2.217 1.5-2.217 3.048v5.608h-3v-11h2.884v1.5h.041c.402-.763 1.381-1.563 2.844-1.563 3.041 0 3.598 2 3.598 4.598v6.465z"/>
             </svg>
