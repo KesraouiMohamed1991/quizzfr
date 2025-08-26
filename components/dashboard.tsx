@@ -9,6 +9,7 @@ import { useTheme } from "next-themes"
 import { signOut } from "next-auth/react"
 import type { User } from "next-auth"
 import { getCategories, getQuizStats, type QuizResult } from "@/lib/quiz-utils"
+import Image from "next/image"
 
 interface DashboardProps {
   user: User
@@ -37,6 +38,13 @@ export function Dashboard({ user, onStartQuiz, recentResults }: DashboardProps) 
             <div className="flex items-center gap-4">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-primary-foreground" />
+                  <Image
+                         src="/favicon.png"
+                         alt="Logo"
+                         width={50}
+                         height={50}
+                         className="rounded-full"
+                       />
               </div>
               <h1 className="text-2xl font-bold text-foreground">Quiz Naturalisation</h1>
             </div>
