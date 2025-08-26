@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <footer className="w-full border-t py-6 mt-12 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300">
+    <footer className="w-full border-t py-6 mt-12 bg-white dark:bg-black text-gray-700 dark:text-gray-300">
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6 md:gap-0 px-4">
         
         {/* Logo + Texte */}

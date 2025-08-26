@@ -1,4 +1,5 @@
 "use client"
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
@@ -8,7 +9,7 @@ import { BookOpen, Trophy, Clock, TrendingUp, LogOut, Moon, Sun } from "lucide-r
 import { useTheme } from "next-themes"
 import { signOut } from "next-auth/react"
 import type { User } from "next-auth"
-import { getCategories, getQuizStats, type QuizResult } from "@/lib/quiz-utils"
+import { getCategories, getQuizStats, type QuizResult, clearQuizResults } from "@/lib/quiz-utils"
 import Image from "next/image"
 
 interface DashboardProps {
@@ -26,8 +27,19 @@ export function Dashboard({ user, onStartQuiz, recentResults }: DashboardProps) 
     signOut({ callbackUrl: "/" })
   }
 
-  const toggleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark")
+const toggleTheme = () => {
+  // treat "system" as dark/light based on current resolved setting
+  const next =
+    theme === "dark" ? "light" :
+    theme === "light" ? "dark" :
+    "dark"
+  setTheme(next)
+}
+
+
+  const handleClearHistory = () => {
+    clearQuizResults()
+    window.location.reload()
   }
 
   return (
@@ -38,21 +50,21 @@ export function Dashboard({ user, onStartQuiz, recentResults }: DashboardProps) 
             <div className="flex items-center gap-4">
               <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-primary-foreground" />
-                  <Image
-                         src="/favicon.png"
-                         alt="Logo"
-                         width={50}
-                         height={50}
-                         className="rounded-full"
-                       />
+                <Image
+                  src="/favicon.png"
+                  alt="Logo"
+                  width={50}
+                  height={50}
+                  className="rounded-full"
+                />
               </div>
               <h1 className="text-2xl font-bold text-foreground">Quiz Naturalisation</h1>
             </div>
 
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={toggleTheme}>
-                {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </Button>
+         <Button variant="ghost" size="icon" onClick={toggleTheme} aria-label="Basculer le thème">
+  {theme === "dark" ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+</Button>
 
               <div className="flex items-center gap-3">
                 <Avatar>
@@ -89,6 +101,7 @@ export function Dashboard({ user, onStartQuiz, recentResults }: DashboardProps) 
             </p>
           </div>
 
+          {/* --- Stats --- */}
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <Card>
               <CardContent className="p-6">
@@ -147,6 +160,7 @@ export function Dashboard({ user, onStartQuiz, recentResults }: DashboardProps) 
             </Card>
           </div>
 
+          {/* --- Catégories --- */}
           <div>
             <h3 className="text-2xl font-bold text-foreground mb-6">Choisissez une catégorie</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -181,12 +195,18 @@ export function Dashboard({ user, onStartQuiz, recentResults }: DashboardProps) 
             </div>
           </div>
 
+          {/* --- Résultats récents --- */}
           {recentResults.length > 0 && (
             <div>
-              <h3 className="text-2xl font-bold text-foreground mb-6">Résultats récents</h3>
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-2xl font-bold text-foreground">Résultats récents</h3>
+                <Button variant="destructive" size="sm" onClick={handleClearHistory}>
+                  Effacer l’historique
+                </Button>
+              </div>
               <div className="grid gap-4">
                 {recentResults.slice(0, 5).map((result, index) => (
-                  <Card key={index}>
+                  <Card key={`${result.categoryId}-${result.date}`}>
                     <CardContent className="p-4">
                       <div className="flex items-center justify-between">
                         <div>

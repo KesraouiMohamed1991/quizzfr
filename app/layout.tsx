@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { AuthProvider } from "@/components/auth-provider"
 import Footer from "@/components/ui/Footer"
 import Head from "next/head"
+import { Toaster } from 'sonner'
 
 
 const manrope = Manrope({
@@ -86,6 +87,8 @@ export default function RootLayout({
             children
           
             }
+                      <Toaster richColors position="top-right" /> {/* Position et style des toasts */}
+
                  <Footer/>
           
           </AuthProvider>
