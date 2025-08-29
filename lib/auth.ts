@@ -74,6 +74,8 @@ export const signOut = () => {
   }
 }
 
+
+
 // Google Identity Services types
 declare global {
   interface Window {
