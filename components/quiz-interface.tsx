@@ -126,7 +126,7 @@ export function QuizInterface({ categoryId, onBack, onComplete }: QuizInterfaceP
       } else {
         completeQuiz(newAnswers) // use finalized answers
       }
-    }, 2000)
+    }, 4000)
   }
 
   const restartQuiz = () => {
